@@ -44,7 +44,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -57,7 +57,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
 
 DATABASES = {
     "default": {
@@ -98,8 +97,14 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 MEDIA_URL = "media/"
-STATIC_ROOT = BASE_DIR / "static"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
