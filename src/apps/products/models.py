@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -20,6 +21,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        if self.parent and self.parent.parent:
+            raise ValidationError("Only one level of nesting is allowed")
 
 
 class Product(models.Model):
