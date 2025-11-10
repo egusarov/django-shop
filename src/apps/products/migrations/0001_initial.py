@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(max_length=100, unique=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='products.category')),
+                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='pages.category')),
             ],
             options={
                 'verbose_name_plural': 'Categories',
@@ -35,11 +35,11 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(max_length=100, unique=True)),
                 ('description', models.TextField(blank=True)),
                 ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('image', models.ImageField(blank=True, upload_to='products/')),
+                ('image', models.ImageField(blank=True, upload_to='pages/')),
                 ('stock', models.PositiveIntegerField(default=0)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to='products.category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='pages', to='pages.category')),
             ],
             options={
                 'ordering': ['name'],

@@ -35,9 +35,9 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
-        related_name='products'
+        related_name='pages'
     )
-    image = models.ImageField(upload_to="products/", blank=True)
+    image = models.ImageField(upload_to="pages/", blank=True)
     stock = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
