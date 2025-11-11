@@ -22,14 +22,14 @@
 <!-- Header -->
 <header>
     <div class="header-container">
-        <a href="{% static 'pages/home.html' %}" class="header__logo">
+        <a href="{% url 'home' %}" class="header__logo">
             <img src="{% static 'img/logo.svg' %}" alt="Hop & Barley Logo">
             <p class="logo-text">Hop & Barley</p>
         </a>
         <nav class="header__nav">
             <ul>
-                <li><a href="{% static 'pages/home.html' %}">Products</a></li>
-                <li><a href="{% static 'guides-recipes.html' %}">Guides & Recipes</a></li>
+                <li><a href="{% url 'home' %}">Products</a></li>
+                <li><a href="{% url 'guides-recipes' %}">Guides & Recipes</a></li>
                 <li><a href="#">Community</a></li>
                 <li><a href="#">Resources</a></li>
                 <li><a href="#">Contact</a></li>

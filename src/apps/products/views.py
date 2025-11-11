@@ -7,6 +7,8 @@ def home(request):
     products = Product.objects.all()
     return render(request, 'pages/home.html', {'products': products})
 
+def guides_recipes(request):
+    return render(request, 'pages/guides_recipes.html')
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
