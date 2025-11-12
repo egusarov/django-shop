@@ -2,4 +2,4 @@
 
 To fill in django-shop with products and categories
 run command
-<code>python manage.py loaddata fixtures\mydata.json</code>
+<code>python manage.py loaddata fixtures\products.json</code>

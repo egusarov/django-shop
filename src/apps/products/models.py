@@ -30,14 +30,17 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
+    card_description = models.TextField(max_length=100)
     description = models.TextField(blank=True)
+    specs = models.JSONField(default=dict)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    price_tag = models.CharField(max_length=50, help_text="e.g. 'per 100g', 'per 1 lb', etc.")
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
-        related_name='pages'
+        related_name='products'
     )
-    image = models.ImageField(upload_to="pages/", blank=True)
+    image = models.ImageField(upload_to="products/", blank=True)
     stock = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
