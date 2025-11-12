@@ -22,7 +22,8 @@ class Review(models.Model):
         validators=[MinValueValidator(1), MaxValueValidator(5)],
         help_text="Rating from 1 to 5"
     )
-    comment = models.TextField(blank=True)
+    title = models.CharField(max_length=255)
+    body = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
