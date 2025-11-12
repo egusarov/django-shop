@@ -52,12 +52,14 @@
       "card_description": "Head retention in darker beers",
       "description": "Caramel Malt 60L (also known as Crystal 60L) is a versatile specialty malt that is a secret weapon for many brewers to enhance beer color, flavor, and body. It imparts a beautiful copper-amber hue to the brew.\r\n\r\nThe flavor of this malt is characterized by distinct notes of caramel, toffee, and light hints of toasted bread. It adds a pleasant sweetness to the beer that beautifully balances hop bitterness and also contributes to improved head retention.\r\n\r\nCaramel Malt 60L is ideal for a wide range of styles, from Pale Ales and Amber Ales to Porters and Stouts, adding complexity and depth.",
       "specs": {
-        "Origin": "USA / UK",
-        "Type": "Caramel / Crystal Malt",
-        "Color (°L)": "55–65 °L",
-        "Flavor": "Caramel, toffee, light toasted bread",
-        "Usage": "Up to 20% of the grist",
-        "Recommended Beer Styles": "Pale Ale, Amber Ale, Porter, Stout"
+        "Origin": "USA / Belgium",
+        "Type": "Crystal/Caramel Malt",
+        "Color (°L)": "60 °L",
+        "Moisture": "5.0% max",
+        "Extract FG, Dry": "75%",
+        "Flavor Profile": "Sweet, caramel, toffee, hints of toasted bread",
+        "Usage": "Typically 3-15% of the grist",
+        "Recommended Beer Styles": "Pale Ale, Amber Ale, IPA, Brown Ale, Porter, Stout, Scotch Ale"
       },
       "price": "3.00",
       "price_tag": "per 1 lb",
@@ -78,13 +80,13 @@
       "description": "Cascade is arguably the most famous hop in the American craft brewing revolution. Developed in Oregon, it has a unique floral and citrus character that defined the taste of the classic American Pale Ale.\r\n\r\nIts moderate bitterness and vibrant aroma, with notes of grapefruit, orange, and light floral undertones, make it incredibly versatile. Cascade is excellent for both bittering and late kettle additions or for dry hopping.\r\n\r\nThis hop is a reliable choice for brewers looking to create a refreshing, balanced, and recognizable ale.",
       "specs": {
         "Origin": "USA",
-        "Type": "Aroma",
+        "Type": "Aroma (Dual-Purpose)",
         "Alpha Acids": "4.5% - 7.0%",
         "Beta Acids": "4.5% - 7.0%",
-        "Aroma Profile": "Floral, citrus, grapefruit, spicy",
+        "Aroma Profile": "Medium-intensity floral, citrus (grapefruit), and spicy notes.",
         "Cohumulone": "33% - 40%",
-        "Total Oil": "0.7 - 1.4 mL/100g",
-        "Recommended Beer Styles": "American Pale Ale, IPA, Blonde Ale, Amber Ale"
+        "Total Oil": "0.8 - 1.5 mL/100g",
+        "Recommended Beer Styles": "American Pale Ale, IPA, Porter, Barleywine, Witbier"
       },
       "price": "7.49",
       "price_tag": "per 100g",
@@ -108,10 +110,10 @@
         "Type": "Dual-Purpose",
         "Alpha Acids": "9.0% - 11.5%",
         "Beta Acids": "3.5% - 4.5%",
-        "Aroma Profile": "Intense floral and citrus (lemon, grapefruit)",
+        "Aroma Profile": "Intense floral and citrus (lemon, grapefruit).",
         "Cohumulone": "28% - 30%",
         "Total Oil": "1.5 - 2.5 mL/100g",
-        "Recommended Beer Styles": "IPA, Double IPA, American Pale Ale"
+        "Recommended Beer Styles": "All US Ale styles, especially IPA, Double IPA, and American Pale Ale."
       },
       "price": "6.20",
       "price_tag": "per 100g",
@@ -135,8 +137,8 @@
         "Type": "Aroma (Dual-Purpose)",
         "Alpha Acids": "11.0% - 13.0%",
         "Beta Acids": "3.0% - 4.5%",
-        "Aroma Profile": "Grapefruit, lime, passion fruit, lychee, melon",
-        "Usage": "Late kettle addition, dry hopping",
+        "Aroma Profile": "Grapefruit, Lime, Passion Fruit, Lychee, Melon",
+        "Usage": "Late Kettle Addition, Dry Hopping",
         "Recommended Beer Styles": "IPA, Double IPA, Pale Ale, American Wheat"
       },
       "price": "5.99",
@@ -162,9 +164,9 @@
         "Attenuation": "73-77%",
         "Temperature Range": "62-72°F (17-22°C)",
         "Alcohol Tolerance": "10% ABV",
-        "Flavor Profile": "Balanced, slightly fruity, citrus and stone fruit",
+        "Flavor Profile": "Balanced, slightly fruity, hints of citrus and stone fruit.",
         "Cell Count": "~200 Billion Cells",
-        "Recommended Beer Styles": "APA, IPA, Double IPA, Porter, Stout, Amber Ale"
+        "Recommended Beer Styles": "American Pale Ale, IPA, Double IPA, Porter, Stout, Amber Ale"
       },
       "price": "8.99",
       "price_tag": "per pouch",
@@ -215,10 +217,10 @@
         "Type": "Dual-Purpose",
         "Alpha Acids": "11.5% - 13.5%",
         "Beta Acids": "3.2% - 3.9%",
-        "Aroma Profile": "Mango, guava, tangerine, blueberry, peach, pine, earthy",
+        "Aroma Profile": "Complex and multifaceted. Tropical fruit (mango, guava), citrus (tangerine), berry (blueberry), stone fruit (peach), pine, and earthy notes.",
         "Cohumulone": "24% - 26%",
         "Total Oil": "1.0 - 1.5 mL/100g",
-        "Recommended Beer Styles": "IPA, Double IPA, NEIPA, American Pale Ale, Session IPA"
+        "Recommended Beer Styles": "IPA, Double IPA, Hazy/NEIPA, American Pale Ale, Session IPA."
       },
       "price": "9.50",
       "price_tag": "per 100g",
@@ -246,7 +248,7 @@
         "Diastatic Power": "> 100 °Lintner",
         "Flavor Profile": "Clean, light, sweet, grainy",
         "Usage": "Up to 100% of the grist",
-        "Recommended Beer Styles": "Pilsner, Helles, Kolsch, Tripel, Light Lager, Saison"
+        "Recommended Beer Styles": "Pilsner, Helles, Kolsch, Belgian Tripel, Light Lagers, Saison"
       },
       "price": "2.20",
       "price_tag": "per 1 lb",
@@ -270,10 +272,10 @@
         "Type": "Aroma",
         "Alpha Acids": "2.0% - 5.0%",
         "Beta Acids": "4.5% - 8.0%",
-        "Aroma Profile": "Mild, pleasant, earthy, spicy, floral",
+        "Aroma Profile": "Mild, pleasant, earthy, spicy, and floral.",
         "Cohumulone": "23% - 28%",
         "Total Oil": "0.4 - 1.0 mL/100g",
-        "Recommended Beer Styles": "Bohemian Pilsner, German Pilsner, Light Lager, Belgian Ale, Lambic"
+        "Recommended Beer Styles": "Bohemian Pilsner, German Pilsner, Light Lagers, Belgian Ales, Lambic"
       },
       "price": "4.75",
       "price_tag": "per 100g",
@@ -299,8 +301,8 @@
         "Flocculation": "Medium to High",
         "Alcohol Tolerance": "9-11% ABV",
         "Fermentation Temperature": "59-75°F (15-24°C)",
-        "Pitching Rate": "11.5g per 20-23L",
-        "Recommended Beer Styles": "APA, IPA, Brown Ale, Porter, Stout, American Wheat"
+        "Pitching Rate": "11.5g sachet for 5-6 gallons (20-23 L)",
+        "Recommended Beer Styles": "American Pale Ale, American IPA, Brown Ale, Porter, Stout, American Wheat"
       },
       "price": "3.25",
       "price_tag": "per 11.5g sachet",
@@ -324,10 +326,10 @@
         "Type": "Unmalted Adjunct",
         "Color (°L)": "~2.0 °L",
         "Moisture": "12% max",
-        "Protein": "High",
+        "Protein": "High (contributes to haze and head retention)",
         "Flavor Profile": "Neutral, subtle raw grain, bready",
-        "Usage": "30–50% of grist for Witbier, requires cereal mash or high-DP malt",
-        "Recommended Beer Styles": "Belgian Witbier, Lambic, Grand Cru, Saison"
+        "Usage": "Typically 30-50% of the grist for Witbiers. Requires a cereal mash or a mash with high diastatic power malts (like Pilsner or 6-Row).",
+        "Recommended Beer Styles": "Belgian Witbier, Lambic, Grand Cru, certain Saisons."
       },
       "price": "1.80",
       "price_tag": "per 1 lb",
@@ -348,7 +350,7 @@
       "description": "Brew a craft brewing classic with our \"West Coast IPA - All-Grain Kit\"! This kit contains all the necessary ingredients to create a bright, bitter, and incredibly aromatic IPA in the style of the US West Coast.\r\n\r\nWe've selected the perfect combination of malts to achieve a clean, dry body that serves as an excellent base for a hop explosion. The kit includes a powerful combination of Centennial, Simcoe, and Columbus hops, which provide a burst of citrus, pine, and resinous notes characteristic of this style.\r\n\r\nThis kit is your ticket to the world of true West Coast IPA. It comes with detailed step-by-step instructions to guide you through every stage, from mashing to bottling.",
       "specs": {
         "Kit Type": "All-Grain",
-        "Batch Size": "5 Gallons (19 L)",
+        "Batch Size": "5 Gallons (19 Liters)",
         "Estimated OG": "1.065",
         "Estimated FG": "1.012",
         "Estimated ABV": "6.9%",
@@ -358,11 +360,11 @@
           "1 lb Caramel Malt 40L",
           "0.5 lb Dextrin Malt",
           "1 oz Columbus (60 min)",
-          "1 oz Simcoe (15 min)",
-          "1 oz Centennial (5 min)",
-          "2 oz Centennial (Dry Hop)",
-          "1 pack SafAle US-05",
-          "Whirlfloc Tablet, Priming Sugar, Instructions"
+          "1 oz Simcoe Hops (15 min)",
+          "1 oz Centennial Hops (5 min)",
+          "2 oz Centennial Hops (Dry Hop)",
+          "1 pack SafAle US-05 Dry Ale Yeast",
+          "Whirlfloc Tablet, Priming Sugar, Step-by-step Instructions"
         ]
       },
       "price": "60.00",
