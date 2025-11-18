@@ -3,94 +3,92 @@
 {% load static %}
 
 {% block content %}
-<!-- Main Content -->
-<main class="page-product">
-    <div class="container">
-        <!-- Product Info Section -->
-        <section class="product-details-section">
-            <div class="product-image-container">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
-            </div>
-            <div class="product-info-column">
-                <div class="product-title-price">
-                    <h1 class="product-name">{{ product.name }}</h1>
-                    <div class="price-section">
-                        <span class="price-tag">{{ product.price_tag }}</span>
-                        <p class="product-price">${{ product.price }}</p>
+    <!-- Main Content -->
+    <main class="page-product">
+        <div class="container">
+            <!-- Product Info Section -->
+            <section class="product-details-section">
+                <div class="product-image-container">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                </div>
+                <div class="product-info-column">
+                    <div class="product-title-price">
+                        <h1 class="product-name">{{ product.name }}</h1>
+                        <div class="price-section">
+                            <span class="price-tag">{{ product.price_tag }}</span>
+                            <p class="product-price">${{ product.price }}</p>
+                        </div>
+                    </div>
+                    <div class="product-description">
+                        <p>{{ product.description|linebreaks }}</p>
+                    </div>
+                    <div class="cart-controls">
+                        <form action="{% url 'cart:add' product.pk %}" method="post">
+                            {% csrf_token %}
+                            <button class="button button--primary add-to-cart-button" type="submit">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span>Add to Cart</span>
+                            </button>
+                        </form>
                     </div>
                 </div>
-                <div class="product-description">
-                    <p>{{ product.description|linebreaks }}</p>
-                </div>
-                <div class="cart-controls">
-                    <button class="button button--primary add-to-cart-button" id="add-to-cart-btn">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <span>Add to Cart</span>
-                    </button>
-                    <div class="quantity-counter is-hidden" id="quantity-counter">
-                        <button class="quantity-btn" data-action="decrease" aria-label="Decrease quantity"><i
-                                class="fa-solid fa-minus"></i></button>
-                        <span class="quantity-value">1 in cart</span>
-                        <button class="quantity-btn" data-action="increase" aria-label="Increase quantity"><i
-                                class="fa-solid fa-plus"></i></button>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Technical Specifications Accordion -->
-        <section class="accordion-section">
-            <div class="accordion-item">
-                <div class="accordion-title">
-                    <h3>Technical Specifications</h3>
-                    <i class="fa-solid fa-chevron-down accordion-icon"></i>
+            <!-- Technical Specifications Accordion -->
+            <section class="accordion-section">
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <h3>Technical Specifications</h3>
+                        <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <ul>
+                            {% for key, value in product.specs.items %}
+                                <li><strong>{{ key }}:</strong>
+                                    {% if value|is_list %}
+                                        <ul>
+                                            {% for item in value %}
+                                                <li>{{ item }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        {{ value }}
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <ul>
-                        {% for key, value in product.specs.items %}
-                            <li><strong>{{ key }}:</strong>
-                            {% if value|is_list %}
-                                <ul>
-                                    {% for item in value %}
-                                        <li>{{ item }}</li>
+            </section>
+
+            <!-- Latest Reviews Section -->
+            {% if reviews %}
+                <section class="reviews-section">
+                    <h2 class="reviews-title">Latest reviews</h2>
+                    <div class="reviews-grid">
+                        {% for review in reviews %}
+                            <div class="review-card">
+                                <div class="review-rating">
+                                    {% for _ in "12345"|slice:":review.rating" %}
+                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i><i
+                                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                                     {% endfor %}
-                                </ul>
-                            {% else %}
-                                {{ value }}
-                            {% endif %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Latest Reviews Section -->
-        {% if reviews %}
-        <section class="reviews-section">
-            <h2 class="reviews-title">Latest reviews</h2>
-            <div class="reviews-grid">
-                {% for review in reviews %}
-                <div class="review-card">
-                    <div class="review-rating">
-                        {% for _ in "12345"|slice:":review.rating" %}
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="review-body">
+                                    <h4 class="review-heading">The Perfect Sweet Spot</h4>
+                                    <p class="review-text">{{ review.comment }}</p>
+                                </div>
+                                <div class="review-author">
+                                    <img src="{% static 'img/avatars/avatar1.svg' %}" alt="User avatar"
+                                         class="author-avatar">
+                                    <span class="author-name">{{ review.user.username }}</span>
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
-                    <div class="review-body">
-                        <h4 class="review-heading">The Perfect Sweet Spot</h4>
-                        <p class="review-text">{{ review.comment }}</p>
-                    </div>
-                    <div class="review-author">
-                        <img src="{% static 'img/avatars/avatar1.svg' %}" alt="User avatar" class="author-avatar">
-                        <span class="author-name">{{ review.user.username }}</span>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </section>
-        {% endif %}
-    </div>
-</main>
+                </section>
+            {% endif %}
+        </div>
+    </main>
 {% endblock %}

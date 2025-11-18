@@ -202,6 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* ============================================================
        4. CART PAGE
     ============================================================ */
+    /*
     const cartPage = document.querySelector(".cart-page-wrapper");
 
     if (cartPage) {
@@ -249,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         updateCartTotal();
     }
-
+    */
 
     /* ============================================================
        5. ACCOUNT / ADMIN PAGES
