@@ -1,0 +1,48 @@
+{% extends "layout/base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="auth-page-wrapper">
+    <div class="auth-background">
+        <img src="{% static 'img/background/pattern.jpg' %}" alt="Background pattern">
+    </div>
+
+    <div class="auth-form-container">
+        <div class="auth-container auth-container--login">
+            <div class="Legend">
+                <h1 class="auth-title">Sign In</h1>
+            </div>
+
+            <form class="auth-form" method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <div class="InputField">
+                    <label for="{{ form.username.id_for_label }}">Email</label>
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                </div>
+
+                <div class="InputField">
+                    <label for="{{ form.password.id_for_label }}">Password</label>
+                    {{ form.password }}
+                    {{ form.password.errors }}
+                </div>
+
+                <div class="ButtonGroup">
+                    <button type="submit" class="button button--primary">Sign In</button>
+                </div>
+
+                <div class="TextLink">
+                    <a href="#">Forgot password?</a>
+                </div>
+            </form>
+
+            <p class="auth-switch">
+                Don’t have an account?
+                <a href="{% url 'users:register' %}">Sign up</a>
+            </p>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -7,6 +7,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("cart/", include("apps.cart.urls")),
     path('', include('apps.products.urls')),
+    path("accounts/", include("django.contrib.auth.urls")),  # login/logout/password reset
+    path("users/", include("apps.users.urls")),  # registration
 ]
 
 if settings.DEBUG:

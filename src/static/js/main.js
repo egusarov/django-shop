@@ -1,41 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* ============================================================
-       1. LOGIN / LOGOUT (works on all pages)
-    ============================================================ */
-    const loginForm = document.getElementById("login-form");
-    const logoutButton = document.getElementById("logout-button");
-
-    function checkLoginStatus() {
-        if (localStorage.getItem("isLoggedIn") === "true") {
-            document.body.classList.add("user-logged-in");
-        } else {
-            document.body.classList.remove("user-logged-in");
-        }
-    }
-
-    checkLoginStatus();
-
-    if (loginForm) {
-        loginForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            localStorage.setItem("isLoggedIn", "true");
-
-            const nextUrl = new URLSearchParams(window.location.search).get("next");
-            window.location.href = nextUrl || "home.html";
-        });
-    }
-
-    if (logoutButton) {
-        logoutButton.addEventListener("click", function (e) {
-            e.preventDefault();
-            localStorage.removeItem("isLoggedIn");
-            window.location.href = "home.html";
-        });
-    }
-
-
-    /* ============================================================
        2. CATALOG PAGE (home.html)
        Sorting, pagination, filters
     ============================================================ */
@@ -197,60 +162,6 @@ document.addEventListener("DOMContentLoaded", function () {
             update();
         }
     }
-
-
-    /* ============================================================
-       4. CART PAGE
-    ============================================================ */
-    /*
-    const cartPage = document.querySelector(".cart-page-wrapper");
-
-    if (cartPage) {
-        const cartItemsList = document.getElementById("cart-items-list");
-        const cartTotalPriceElem = document.getElementById("cart-total-price");
-
-        function updateCartTotal() {
-            let total = 0;
-            document.querySelectorAll(".cart-item").forEach(item => {
-                const priceText = item.querySelector("[data-item-total-price]").textContent;
-                if (priceText) {
-                    total += parseFloat(priceText.replace("$", ""));
-                }
-            });
-            cartTotalPriceElem.textContent = `$${total.toFixed(2)}`;
-        }
-
-        if (cartItemsList) {
-            cartItemsList.addEventListener("click", function (event) {
-                const item = event.target.closest(".cart-item");
-                if (!item) return;
-
-                const qtyElem = item.querySelector(".quantity-value-cart");
-                const priceElem = item.querySelector("[data-item-total-price]");
-                const basePrice = parseFloat(item.dataset.price);
-
-                let qty = parseInt(qtyElem.textContent);
-
-                if (event.target.closest("[data-action='increase']")) {
-                    qty++;
-                } else if (event.target.closest("[data-action='decrease']")) {
-                    qty = qty > 1 ? qty - 1 : 0;
-                }
-
-                if (event.target.closest("[data-action='remove']") || qty === 0) {
-                    item.remove();
-                } else {
-                    qtyElem.textContent = qty;
-                    priceElem.textContent = `$${(basePrice * qty).toFixed(2)}`;
-                }
-
-                updateCartTotal();
-            });
-        }
-
-        updateCartTotal();
-    }
-    */
 
     /* ============================================================
        5. ACCOUNT / ADMIN PAGES

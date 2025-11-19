@@ -1,5 +1,7 @@
 from decimal import Decimal
+
 from apps.products.models import Product
+
 
 CART_SESSION_ID = "cart"
 
