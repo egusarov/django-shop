@@ -63,10 +63,16 @@ def checkout(request):
         # simple form: shipping_address, maybe phone/email
         shipping = request.POST.get("shipping_address", "")
         if not shipping:
-            return render(request, "cart/checkout.html", {"cart": cart, "error": "Введите адрес доставки"})
+            return render(
+                request,
+                "cart/checkout.html",
+                {"cart": cart, "error": "Enter Shipping Address"},
+            )
         # calculate totals
         subtotal = cart.get_subtotal()
-        shipping_cost = Decimal("5.00") if subtotal < Decimal("50.00") else Decimal("0.00")
+        shipping_cost = (
+            Decimal("5.00") if subtotal < Decimal("50.00") else Decimal("0.00")
+        )
         total = subtotal + shipping_cost
 
         # create order
@@ -74,7 +80,7 @@ def checkout(request):
             user=request.user if request.user.is_authenticated else None,
             status="pending",
             total_price=total,
-            shipping_address=shipping
+            shipping_address=shipping,
         )
 
         # create positions and decrease stock
@@ -83,10 +89,7 @@ def checkout(request):
             quantity = item["quantity"]
             price = item["price"]
             OrderItem.objects.create(
-                order=order,
-                product=product,
-                quantity=quantity,
-                price=price
+                order=order, product=product, quantity=quantity, price=price
             )
             # decrease stock — preliminary check
             if product.stock is not None:

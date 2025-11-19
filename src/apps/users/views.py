@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, AccountInfoForm
+from ..orders.models import Order
 
 
 def register(request):
@@ -32,4 +32,15 @@ def login_view(request):
 
 @login_required
 def account(request):
-    return render(request, "users/account.html")
+    user = request.user
+    orders = Order.objects.filter(user=user).order_by("-created_at")
+
+    if request.method == "POST":
+        form = AccountInfoForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("users:account")
+    else:
+        form = AccountInfoForm(instance=user)
+
+    return render(request, "users/account.html", {"form": form, "orders": orders})

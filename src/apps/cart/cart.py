@@ -1,9 +1,7 @@
 from decimal import Decimal
 
 from apps.products.models import Product
-
-
-CART_SESSION_ID = "cart"
+from core.settings import CART_SESSION_ID
 
 
 class Cart:
@@ -17,7 +15,8 @@ class Cart:
     def add(self, product: Product, quantity=1, replace_quantity=False, extra=None):
         """
         Add product or update quantity.
-        extra — optional dict for options (size, measure...), can save as JSON-serializable.
+        extra — optional dict for options (size, measure...).
+        It must be JSON-serializable.
         """
         product_id = str(product.pk)
         if product_id not in self.cart:
@@ -67,7 +66,9 @@ class Cart:
         return sum(item["quantity"] for item in self.cart.values())
 
     def get_subtotal(self):
-        return sum(Decimal(item["price"]) * item["quantity"] for item in self.cart.values())
+        return sum(
+            Decimal(item["price"]) * item["quantity"] for item in self.cart.values()
+        )
 
     def clear(self):
         self.session.pop(CART_SESSION_ID, None)

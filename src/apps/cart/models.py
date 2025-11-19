@@ -1,7 +1,7 @@
 # apps/cart/models.py
 from django.db import models
 from django.conf import settings
-from apps.products.models import Product
+
 
 class CartModel(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

@@ -1,3 +1,9 @@
 [tool.ruff]
-exclude = ["migrations", "venv", "__pycache__"]
+exclude = [
+    "migrations",
+    "venv",
+    "__pycache__",
+]
+
+[tool.ruff.lint]
 select = ["E", "F", "W", "C", "B"]
