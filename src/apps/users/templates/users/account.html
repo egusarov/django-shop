@@ -103,12 +103,14 @@
                             <button type="submit" class="button button--primary button--full-width">
                                 Save
                             </button>
+                        </form>
 
-                            <a href="{% url 'logout' %}"
-                               class="button button--secondary button--full-width">
+                        <form method="post" action="{% url 'users:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="button button--secondary button--full-width"
+                                    style="margin-top: 15px;">
                                 Logout
-                            </a>
-
+                            </button>
                         </form>
                     </div>
                 </div>
