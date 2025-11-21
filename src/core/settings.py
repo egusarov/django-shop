@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "apps.users",
     "apps.reviews",
     "apps.cart",
+    "apps.payments",
 ]
 
 MIDDLEWARE = [
@@ -117,3 +118,8 @@ LOGOUT_REDIRECT_URL = "home"
 LOGIN_URL = "login"
 
 CART_SESSION_ID = "cart"
+
+# Stripe
+STRIPE_PUBLIC_KEY = os.getenv("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
+STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")

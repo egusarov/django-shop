@@ -9,6 +9,7 @@ urlpatterns = [
     path("", include("apps.products.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("users/", include("apps.users.urls")),
+    path("payments/", include("apps.payments.urls")),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,29 @@
+{% extends "layout/base.html" %}
+{% load static %}
+
+{% block title %}Payment Successful | Hop & Barley{% endblock %}
+
+{% block content %}
+<main class="payment-page-wrapper">
+    <div class="payment-container">
+
+        <div class="payment-card success">
+            <img src="{% static 'img/icons/check-circle.svg' %}" alt="Success" class="payment-icon">
+
+            <h1 class="payment-title">Payment Successful</h1>
+            <p class="payment-message">
+                Thank you for your purchase! Your order has been successfully processed.
+            </p>
+
+            <a href="{% url 'home' %}" class="button button--primary">
+                Continue Shopping
+            </a>
+
+            <a href="{% url 'users:account' %}" class="button button--secondary">
+                View My Orders
+            </a>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,42 @@
+.payment-page-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
+.payment-container {
+    max-width: 520px;
+    width: 100%;
+}
+
+.payment-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.payment-icon {
+    width: 72px;
+    margin-bottom: 24px;
+}
+
+.payment-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.payment-message {
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+.payment-card.success .payment-icon {
+    filter: hue-rotate(90deg);
+}
+
+.payment-card.cancel .payment-icon {
+    filter: hue-rotate(-20deg);
+}
