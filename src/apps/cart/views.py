@@ -49,58 +49,125 @@ def cart_update_quantity(request, product_id):
     return redirect(reverse("cart:detail") + "#cart")
 
 
+# ruff: noqa: C901
 @transaction.atomic
 def checkout(request):
     """
-    Simple realization of order processing:
-    - create Order
-    - create OrderItem for each position
-    - decrease stock
-    - clear cart
+    Order flow:
+    - GET: show checkout form with initial shipping fields
+    - POST: validate, calculate totals, create Order + OrderItems,
+      decrease stock, store shipping info in user (if fields exist),
+      clear cart and show thank-you page.
     """
     cart = Cart(request)
+
+    user = request.user if request.user.is_authenticated else None
+
+    initial = {
+        "full_name": getattr(user, "full_name", "") if user else "",
+        "phone": getattr(user, "phone", "") if user else "",
+        "city": getattr(user, "city", "") if user else "",
+        "address": getattr(user, "address", "") if user else "",
+    }
+
     if request.method == "POST":
-        # simple form: shipping_address, maybe phone/email
-        shipping = request.POST.get("shipping_address", "")
-        if not shipping:
+        full_name = request.POST.get("full_name", "").strip()
+        phone = request.POST.get("phone", "").strip()
+        city = request.POST.get("city", "").strip()
+        address = request.POST.get("address", "").strip()
+
+        posted = {
+            "full_name": full_name,
+            "phone": phone,
+            "city": city,
+            "address": address,
+        }
+
+        if not full_name:
             return render(
                 request,
                 "cart/checkout.html",
-                {"cart": cart, "error": "Enter Shipping Address"},
+                {
+                    "cart": cart,
+                    "initial": posted,
+                    "error": "Enter full name",
+                },
             )
-        # calculate totals
+
+        if not address:
+            return render(
+                request,
+                "cart/checkout.html",
+                {
+                    "cart": cart,
+                    "initial": posted,
+                    "error": "Enter shipping address",
+                },
+            )
+
         subtotal = cart.get_subtotal()
         shipping_cost = (
             Decimal("5.00") if subtotal < Decimal("50.00") else Decimal("0.00")
         )
         total = subtotal + shipping_cost
 
-        # create order
+        shipping_text = f"{full_name}\n{phone}\n{city}\n{address}"
+
         order = Order.objects.create(
-            user=request.user if request.user.is_authenticated else None,
+            user=user if user and user.is_authenticated else None,
             status="pending",
             total_price=total,
-            shipping_address=shipping,
+            shipping_address=shipping_text,
         )
 
-        # create positions and decrease stock
         for item in cart:
             product = item["product"]
-            quantity = item["quantity"]
+            quantity = int(item["quantity"])
             price = item["price"]
+
             OrderItem.objects.create(
-                order=order, product=product, quantity=quantity, price=price
+                order=order,
+                product=product,
+                quantity=quantity,
+                price=price,
             )
-            # decrease stock — preliminary check
-            if product.stock is not None:
+
+            if hasattr(product, "stock") and product.stock is not None:
                 if product.stock < quantity:
-                    # revert transaction
                     raise ValueError(f"Not enough stock for {product.name}")
                 product.stock -= quantity
                 product.save()
 
-        # here can integrate payment system: create payment intent and redirect
-        cart.clear()
-        return render(request, "cart/thankyou.html", {"order": order})
+        if user and user.is_authenticated:
+            changed = False
+            if hasattr(user, "full_name"):
+                user.full_name = full_name
+                changed = True
+            if hasattr(user, "phone"):
+                user.phone = phone
+                changed = True
+            if hasattr(user, "city"):
+                user.city = city
+                changed = True
+            if hasattr(user, "address"):
+                user.address = address
+                changed = True
+            if changed:
+                user.save()
 
-    return render(request, "cart/checkout.html", {"cart": cart})
+        cart.clear()
+
+        return render(
+            request,
+            "cart/thankyou.html",
+            {"order": order},
+        )
+
+    return render(
+        request,
+        "cart/checkout.html",
+        {
+            "cart": cart,
+            "initial": initial,
+        },
+    )

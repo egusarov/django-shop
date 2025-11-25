@@ -14,22 +14,22 @@
                     <h2 class="checkout-section__title">Shipping information</h2>
                     <div class="checkout-form-group">
                         <label>Full Name</label>
-                        <input type="text" name="full_name" class="Input" required>
+                        <input type="text" name="full_name" class="Input" value="{{ initial.full_name }}" required>
                     </div>
 
                     <div class="checkout-form-group">
                         <label>Phone number</label>
-                        <input type="tel" name="phone" class="Input" required>
+                        <input type="tel" name="phone" class="Input" value="{{ initial.phone }}" required>
                     </div>
 
                     <div class="checkout-form-group">
                         <label>City</label>
-                        <input type="text" name="city" class="Input" required>
+                        <input type="text" name="city" class="Input" value="{{ initial.city }}" required>
                     </div>
 
                     <div class="checkout-form-group">
                         <label>Shipping address</label>
-                        <textarea name="address" class="Textarea" rows="3" required></textarea>
+                        <textarea name="address" class="Textarea" rows="3" required>{{ initial.address }}</textarea>
                     </div>
                 </section>
 
