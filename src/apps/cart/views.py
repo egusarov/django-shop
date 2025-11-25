@@ -1,11 +1,15 @@
-from decimal import Decimal
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.http import require_POST
 from django.db import transaction
 from apps.products.models import Product
-from apps.orders.models import Order, OrderItem
 from .cart import Cart
+from apps.cart.services.checkout import (
+    validate_checkout_form,
+    calculate_totals,
+    create_order_with_items,
+    update_user_shipping_info,
+)
 
 
 @require_POST
@@ -49,18 +53,9 @@ def cart_update_quantity(request, product_id):
     return redirect(reverse("cart:detail") + "#cart")
 
 
-# ruff: noqa: C901
 @transaction.atomic
 def checkout(request):
-    """
-    Order flow:
-    - GET: show checkout form with initial shipping fields
-    - POST: validate, calculate totals, create Order + OrderItems,
-      decrease stock, store shipping info in user (if fields exist),
-      clear cart and show thank-you page.
-    """
     cart = Cart(request)
-
     user = request.user if request.user.is_authenticated else None
 
     initial = {
@@ -71,103 +66,47 @@ def checkout(request):
     }
 
     if request.method == "POST":
-        full_name = request.POST.get("full_name", "").strip()
-        phone = request.POST.get("phone", "").strip()
-        city = request.POST.get("city", "").strip()
-        address = request.POST.get("address", "").strip()
-
-        posted = {
-            "full_name": full_name,
-            "phone": phone,
-            "city": city,
-            "address": address,
+        form_data = {
+            "full_name": request.POST.get("full_name", "").strip(),
+            "phone": request.POST.get("phone", "").strip(),
+            "city": request.POST.get("city", "").strip(),
+            "address": request.POST.get("address", "").strip(),
         }
 
-        if not full_name:
+        valid, error = validate_checkout_form(form_data)
+        if not valid:
             return render(
                 request,
                 "cart/checkout.html",
-                {
-                    "cart": cart,
-                    "initial": posted,
-                    "error": "Enter full name",
-                },
-            )
-
-        if not address:
-            return render(
-                request,
-                "cart/checkout.html",
-                {
-                    "cart": cart,
-                    "initial": posted,
-                    "error": "Enter shipping address",
-                },
+                {"cart": cart, "initial": form_data, "error": error},
             )
 
         subtotal = cart.get_subtotal()
-        shipping_cost = (
-            Decimal("5.00") if subtotal < Decimal("50.00") else Decimal("0.00")
+        shipping_cost, total = calculate_totals(subtotal)
+
+        shipping_text = (
+            f"{form_data['full_name']}\n"
+            f"{form_data['phone']}\n"
+            f"{form_data['city']}\n"
+            f"{form_data['address']}"
         )
-        total = subtotal + shipping_cost
 
-        shipping_text = f"{full_name}\n{phone}\n{city}\n{address}"
-
-        order = Order.objects.create(
-            user=user if user and user.is_authenticated else None,
-            status="pending",
+        order = create_order_with_items(
+            user=user,
+            cart=cart,
+            shipping_text=shipping_text,
             total_price=total,
-            shipping_address=shipping_text,
         )
-
-        for item in cart:
-            product = item["product"]
-            quantity = int(item["quantity"])
-            price = item["price"]
-
-            OrderItem.objects.create(
-                order=order,
-                product=product,
-                quantity=quantity,
-                price=price,
-            )
-
-            if hasattr(product, "stock") and product.stock is not None:
-                if product.stock < quantity:
-                    raise ValueError(f"Not enough stock for {product.name}")
-                product.stock -= quantity
-                product.save()
 
         if user and user.is_authenticated:
-            changed = False
-            if hasattr(user, "full_name"):
-                user.full_name = full_name
-                changed = True
-            if hasattr(user, "phone"):
-                user.phone = phone
-                changed = True
-            if hasattr(user, "city"):
-                user.city = city
-                changed = True
-            if hasattr(user, "address"):
-                user.address = address
-                changed = True
-            if changed:
-                user.save()
+            update_user_shipping_info(user, form_data)
 
         cart.clear()
 
-        return render(
-            request,
-            "cart/thankyou.html",
-            {"order": order},
-        )
+        return render(request, "cart/thankyou.html", {"order": order})
 
     return render(
         request,
         "cart/checkout.html",
-        {
-            "cart": cart,
-            "initial": initial,
-        },
+        {"cart": cart, "initial": initial},
     )
